@@ -4,7 +4,8 @@
   "description": "Fancy todo app that I created again in order to prepare for the livecode next week. Also because somehow the less-fancy version of it broke down or something.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "NODE_ENV=development nodemon app.js"
   },
   "keywords": [
     "fancier-todo"

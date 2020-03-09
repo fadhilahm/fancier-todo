@@ -1,5 +1,5 @@
 "use strict";
-const addOneDay = require("../helpers/addOneDay");
+const { addOneDay } = require("../helpers/addOneDay");
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
 
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       },
       due_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: true,
         defaultValue: addOneDay(),
         validate: {
@@ -58,6 +58,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+      hooks: {
+        beforeValidate: (todo, options) => {
+          if (todo.due_date === "") {
+            todo.due_date = addOneDay();
+          }
+        }
+      },
       sequelize,
       modelName: "Todo"
     }
