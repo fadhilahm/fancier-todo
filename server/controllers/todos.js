@@ -1,5 +1,6 @@
 const { Todo } = require("../models");
 const axios = require("axios");
+const { sendEmail } = require("../helpers/sendEmail");
 
 class TodoController {
   static findAll(req, res, next) {
@@ -45,6 +46,7 @@ class TodoController {
         });
       })
       .then(resCreated => {
+        sendEmail(resCreated, req.decoded.email);
         res.status(201).json({
           data: resCreated
         });
